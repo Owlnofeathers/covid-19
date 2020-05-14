@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <div class="container mx-auto px-10">
+    <div class="container mx-auto px-10 pb-32">
       <img
         class="object-contain h-32 w-full mt-10"
         alt="Image of Washington State with Clark County Highlighted"
         src="./assets/washington_highlighting_clark_county.png"
       />
-      <h1 class="text-5xl text-gray-600 font-extrabold text-center">
-        COVID-19
-      </h1>
+      <h1 class="text-5xl text-gray-600 font-extrabold text-center">COVID-19</h1>
       <div class="md:text-center md:px-32">
+        <p class="mb-3">
+          This site was created and is maintained by <a href="https://adambailey.io/" class="link">Adam Bailey</a>
+          for an easy place to check the covid-19 totals in Clark County.
+        </p>
         <p>
           The data is aggregated by
           <a href="https://covidactnow.org/" class="link">CovidActNow.org</a>
