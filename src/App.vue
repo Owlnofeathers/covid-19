@@ -2,28 +2,47 @@
   <div id="app">
     <div class="container mx-auto px-10">
       <img
-        class="object-contain h-48 w-full mt-10"
+        class="object-contain h-32 w-full mt-10"
         alt="Image of Washington State with Clark County Highlighted"
         src="./assets/washington_highlighting_clark_county.png"
       />
       <h1 class="text-5xl text-gray-600 font-extrabold text-center">
         COVID-19
       </h1>
-      <DisplayData
-        v-if="stateData"
-        :title="`Current data for ${stateData.stateName} State`"
-        :data="stateData"
-        class="my-10"
-      ></DisplayData>
-      <DisplayData
-        v-if="countyData"
-        :title="
-          `Current data for ${countyData.countyName} County, ${countyData.stateName}`
-        "
-        :data="countyData"
-        class="my-10"
-      ></DisplayData>
-      {{ countyData }}
+      <div class="md:text-center md:px-32">
+        <p>
+          The data is aggregated by
+          <a href="https://covidactnow.org/" class="link">CovidActNow.org</a>
+          and pulled in via their
+          <a
+            href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
+            class="link"
+            >Official API</a
+          >.
+        </p>
+        <p class="text-gray-600">
+          "Covid Act Now is a multidisciplinary team of technologists,
+          epidemiologists, health experts, and public policy leaders working to
+          provide disease intelligence and data analysis on COVID in the U.S"
+        </p>
+        <p v-if="stateData" class="mt-3 text-sm">
+          Last Updated: {{ new Date(stateData.lastUpdatedDate).toDateString() }}
+        </p>
+      </div>
+      <div class="md:px-32">
+        <DisplayData
+          v-if="stateData"
+          :title="`${stateData.stateName} State`"
+          :data="stateData"
+          class="my-10"
+        ></DisplayData>
+        <DisplayData
+          v-if="countyData"
+          :title="`${countyData.countyName} County, ${countyData.stateName}`"
+          :data="countyData"
+          class="mb-10"
+        ></DisplayData>
+      </div>
     </div>
   </div>
 </template>
@@ -67,3 +86,11 @@ export default {
   }
 };
 </script>
+<style>
+.link {
+  color: blue;
+}
+.link:hover {
+  text-decoration: underline;
+}
+</style>
