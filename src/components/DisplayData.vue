@@ -14,7 +14,7 @@
         >Current Cumulative Cases:</span
       >
       <span class="text-gray-800 text-2xl font-bold mr-2">{{
-        data.actuals.cumulativeConfirmedCases.toLocaleString()
+        data.actuals.cases.toLocaleString()
       }}</span>
       <span>({{ percentCases }}%)</span>
     </p>
@@ -23,7 +23,7 @@
         >Current Cumulative Deaths:</span
       >
       <span class="text-gray-800 text-2xl font-bold mr-2">{{
-        data.actuals.cumulativeDeaths.toLocaleString()
+        data.actuals.deaths.toLocaleString()
       }}</span>
       <span>({{ percentDeaths }}%)</span>
     </p>
@@ -57,28 +57,24 @@ export default {
   },
   computed: {
     positiveTests() {
-      return this.data.actuals.cumulativePositiveTests
-        ? this.data.actuals.cumulativePositiveTests.toLocaleString()
+      return this.data.actuals.positiveTests
+        ? this.data.actuals.positiveTests.toLocaleString()
         : "None Reported";
     },
     negativeTests() {
-      return this.data.actuals.cumulativeNegativeTests
-        ? this.data.actuals.cumulativeNegativeTests.toLocaleString()
+      return this.data.actuals.negativeTests
+        ? this.data.actuals.negativeTests.toLocaleString()
         : "None Reported";
     },
     percentCases() {
-      return this.data.actuals.cumulativeConfirmedCases
-        ? (
-            (this.data.actuals.cumulativeConfirmedCases /
-              this.data.population) *
-            100
-          ).toFixed(3)
+      return this.data.actuals.cases
+        ? ((this.data.actuals.cases / this.data.population) * 100).toFixed(3)
         : 0;
     },
     percentDeaths() {
-      return this.data.actuals.cumulativeDeaths
+      return this.data.actuals.deaths
         ? (
-            (this.data.actuals.cumulativeDeaths / this.data.population) *
+            (this.data.actuals.deaths / this.data.population) *
             100
           ).toFixed(3)
         : 0;

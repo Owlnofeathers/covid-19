@@ -16,14 +16,14 @@
         ></vue-simple-suggest>
         <p v-if="error" class="text-red-700 text-sm">{{ error }}</p>
         <p v-if="stateData" class="mt-3 mb-5 text-sm">
-          Last Updated: {{ new Date(stateData.lastUpdatedDate).toDateString() }}
+          Last Updated: <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
         </p>
       </div>
       <div class="md:px-32 md:flex">
         <transition name="fade">
           <DisplayData
             v-if="stateData"
-            :title="`${stateData.stateName} State`"
+            :title="`${stateData.state} State`"
             :data="stateData"
             class="md:mr-10"
           ></DisplayData>
@@ -31,7 +31,7 @@
         <transition name="fade">
           <DisplayData
             v-if="countyData"
-            :title="`${countyData.countyName} County, ${countyData.stateName}`"
+            :title="`${countyData.county}, ${countyData.state}`"
             :data="countyData"
             class="mt-5 md:mt-0"
           ></DisplayData>
@@ -47,7 +47,7 @@ import axios from "axios";
 import DisplayData from "./components/DisplayData";
 import VueSimpleSuggest from "vue-simple-suggest";
 import "vue-simple-suggest/dist/styles.css";
-import Footer from "./components/Footer"; // Using a css-loader
+import Footer from "./components/Footer";
 
 export default {
   name: "App",
@@ -58,7 +58,8 @@ export default {
       countyData: null,
       countyCodes: [],
       chosenCounty: null,
-      error: null
+      error: null,
+      apiKey: "754ba7d2bbd5429ca95c4ee58b200e08"
     };
   },
   created() {
@@ -129,7 +130,7 @@ export default {
     fetchCountyData(fipscode = "53011") {
       return axios
         .get(
-          `https://data.covidactnow.org/latest/us/counties/${fipscode}.NO_INTERVENTION.json`
+          `https://api.covidactnow.org/v2/county/${fipscode}.json?apiKey=${this.apiKey}`
         )
         .catch(() => {
           this.error =
@@ -145,7 +146,7 @@ export default {
     fetchStateData(state = "WA") {
       return axios
         .get(
-          `https://data.covidactnow.org/latest/us/states/${state}.NO_INTERVENTION.json`
+          `https://api.covidactnow.org/v2/state/${state}.json?apiKey=${this.apiKey}`
         )
         .then(response => {
           this.stateData = response.data;
