@@ -10,7 +10,7 @@
       <a href="https://covidactnow.org/" class="link">CovidActNow.org</a>
       and pulled in via their
       <a
-        href="https://github.com/covid-projections/covid-data-model/blob/master/api/README.V1.md"
+        href="https://apidocs.covidactnow.org/"
         class="link"
         >Official API</a
       >.
