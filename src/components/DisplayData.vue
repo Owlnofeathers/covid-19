@@ -39,6 +39,18 @@
       >
       <span class="text-gray-800 text-2xl font-bold">{{ negativeTests }}</span>
     </p>
+    <p>
+      <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
+      >Current COVID Cases In ICU:</span
+      >
+      <span class="text-gray-800 text-2xl font-bold">{{ data.metrics.icuHeadroomDetails.currentIcuCovid }}</span>
+    </p>
+    <p>
+      <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
+      >Current NON-COVID Cases In ICU:</span
+      >
+      <span class="text-gray-800 text-2xl font-bold">{{ data.metrics.icuHeadroomDetails.currentIcuNonCovid }}</span>
+    </p>
   </div>
 </template>
 
