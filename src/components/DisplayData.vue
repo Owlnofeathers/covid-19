@@ -9,6 +9,8 @@
         data.population.toLocaleString()
       }}</span>
     </p>
+    <h1 class="text-3xl text-blue-600 font-bold">Cases</h1>
+
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
         >Current Cumulative Cases:</span
@@ -80,7 +82,7 @@
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
         >Second shots:</span
       >
-      <span class="text-gray-800 text-2xl font-bold">{{
+      <span class="text-gray-800 text-2xl font-bold mr-2">{{
         data.actuals.vaccinationsCompleted.toLocaleString()
       }}</span>
       <span>({{ percentVaccinated }}%)</span>

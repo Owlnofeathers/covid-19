@@ -16,7 +16,8 @@
         ></vue-simple-suggest>
         <p v-if="error" class="text-red-700 text-sm">{{ error }}</p>
         <p v-if="stateData" class="mt-3 mb-5 text-sm">
-          Last Updated: <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
+          Last Updated:
+          <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
         </p>
       </div>
       <div class="md:px-32 md:flex">
@@ -37,6 +38,9 @@
           ></DisplayData>
         </transition>
       </div>
+      <div class="py-10 md:px-32">
+        <SourceData :data="countyData" />
+      </div>
       <Footer></Footer>
     </div>
   </div>
@@ -48,10 +52,11 @@ import DisplayData from "./components/DisplayData";
 import VueSimpleSuggest from "vue-simple-suggest";
 import "vue-simple-suggest/dist/styles.css";
 import Footer from "./components/Footer";
+import SourceData from "./components/SourceData";
 
 export default {
   name: "App",
-  components: { Footer, DisplayData, VueSimpleSuggest },
+  components: { SourceData, Footer, DisplayData, VueSimpleSuggest },
   data() {
     return {
       stateData: null,
