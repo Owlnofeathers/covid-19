@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="min-h-screen bg-gray-100">
-      <div class="container mx-auto pb-10 space-y-10">
+      <div class="container mx-auto px-6 pb-10 space-y-10">
         <h1
           class="text-3xl text-gray-800 font-extrabold text-center pt-20 md:text-5xl"
         >
@@ -21,7 +21,7 @@
             <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
           </p>
         </div>
-        <div class="p-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+        <div class=" p-6 md:px-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
           <div class="md:flex">
             <transition name="fade">
               <DisplayData
@@ -41,7 +41,7 @@
             </transition>
           </div>
         </div>
-        <div class="p-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6 md:px-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
           <SourceData :data="countyData" />
         </div>
         <Footer></Footer>

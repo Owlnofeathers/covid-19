@@ -9,7 +9,7 @@
         data.population.toLocaleString()
       }}</span>
     </p>
-    <h1 class="text-3xl text-blue-600 font-bold">Cases</h1>
+    <h1 class="text-3xl text-blue-600 font-bold mt-6">Cases</h1>
 
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
@@ -30,13 +30,13 @@
       <span>({{ percentDeaths }}%)</span>
     </p>
 
-    <h1 class="text-3xl text-blue-600 font-bold">ICU Beds</h1>
+    <h1 class="text-3xl text-blue-600 font-bold mt-6">ICU Beds</h1>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
         >Current COVID Cases In ICU:</span
       >
       <span class="text-gray-800 text-2xl font-bold">{{
-        data.actuals.icuBeds.currentUsageCovid
+        data.actuals.icuBeds.currentUsageCovid.toLocaleString()
       }}</span>
     </p>
     <p>
@@ -44,18 +44,20 @@
         >Current NON-COVID Cases In ICU:</span
       >
       <span class="text-gray-800 text-2xl font-bold">{{
-        data.actuals.icuBeds.currentUsageTotal -
+        (
+          data.actuals.icuBeds.currentUsageTotal -
           data.actuals.icuBeds.currentUsageCovid
+        ).toLocaleString()
       }}</span>
     </p>
 
-    <h1 class="text-3xl text-blue-600 font-bold">Hospital Beds</h1>
+    <h1 class="text-3xl text-blue-600 font-bold mt-6">Hospital Beds</h1>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
         >Current COVID Cases In Hospitals:</span
       >
       <span class="text-gray-800 text-2xl font-bold">{{
-        data.actuals.hospitalBeds.currentUsageCovid
+        data.actuals.hospitalBeds.currentUsageCovid.toLocaleString()
       }}</span>
     </p>
     <p>
@@ -63,12 +65,14 @@
         >Current NON-COVID Cases In Hospitals:</span
       >
       <span class="text-gray-800 text-2xl font-bold">{{
-        data.actuals.hospitalBeds.currentUsageTotal -
+        (
+          data.actuals.hospitalBeds.currentUsageTotal -
           data.actuals.hospitalBeds.currentUsageCovid
+        ).toLocaleString()
       }}</span>
     </p>
 
-    <h1 class="text-3xl text-blue-600 font-bold">Vaccines</h1>
+    <h1 class="text-3xl text-blue-600 font-bold mt-6">Vaccines</h1>
     <p>(Pfizer/ Moderna)</p>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
@@ -106,12 +110,12 @@ export default {
   computed: {
     percentCases() {
       return this.data.actuals.cases
-        ? ((this.data.actuals.cases / this.data.population) * 100).toFixed(3)
+        ? ((this.data.actuals.cases / this.data.population) * 100).toFixed(2)
         : 0;
     },
     percentDeaths() {
       return this.data.actuals.deaths
-        ? ((this.data.actuals.deaths / this.data.population) * 100).toFixed(3)
+        ? ((this.data.actuals.deaths / this.data.population) * 100).toFixed(2)
         : 0;
     },
     percentVaccinated() {
@@ -119,7 +123,7 @@ export default {
         ? (
             (this.data.actuals.vaccinationsCompleted / this.data.population) *
             100
-          ).toFixed(3)
+          ).toFixed(2)
         : 0;
     }
   }
