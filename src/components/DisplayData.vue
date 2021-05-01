@@ -27,29 +27,63 @@
       }}</span>
       <span>({{ percentDeaths }}%)</span>
     </p>
+
+    <h1 class="text-3xl text-blue-600 font-bold">ICU Beds</h1>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
-        >Current Cumulative Positive Tests:</span
+        >Current COVID Cases In ICU:</span
       >
-      <span class="text-gray-800 text-2xl font-bold">{{ positiveTests }}</span>
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.icuBeds.currentUsageCovid
+      }}</span>
     </p>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
-        >Current Cumulative Negative Tests:</span
+        >Current NON-COVID Cases In ICU:</span
       >
-      <span class="text-gray-800 text-2xl font-bold">{{ negativeTests }}</span>
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.icuBeds.currentUsageTotal -
+          data.actuals.icuBeds.currentUsageCovid
+      }}</span>
+    </p>
+
+    <h1 class="text-3xl text-blue-600 font-bold">Hospital Beds</h1>
+    <p>
+      <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
+        >Current COVID Cases In Hospitals:</span
+      >
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.hospitalBeds.currentUsageCovid
+      }}</span>
     </p>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
-      >Current COVID Cases In ICU:</span
+        >Current NON-COVID Cases In Hospitals:</span
       >
-      <span class="text-gray-800 text-2xl font-bold">{{ data.metrics.icuHeadroomDetails.currentIcuCovid }}</span>
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.hospitalBeds.currentUsageTotal -
+          data.actuals.hospitalBeds.currentUsageCovid
+      }}</span>
+    </p>
+
+    <h1 class="text-3xl text-blue-600 font-bold">Vaccines</h1>
+    <p>(Pfizer/ Moderna)</p>
+    <p>
+      <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
+        >First shots:</span
+      >
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.vaccinationsInitiated.toLocaleString()
+      }}</span>
     </p>
     <p>
       <span class="text-gray-600 font-bold mr-2 block md:inline md:text-xl"
-      >Current NON-COVID Cases In ICU:</span
+        >Second shots:</span
       >
-      <span class="text-gray-800 text-2xl font-bold">{{ data.metrics.icuHeadroomDetails.currentIcuNonCovid }}</span>
+      <span class="text-gray-800 text-2xl font-bold">{{
+        data.actuals.vaccinationsCompleted.toLocaleString()
+      }}</span>
+      <span>({{ percentVaccinated }}%)</span>
     </p>
   </div>
 </template>
@@ -68,16 +102,6 @@ export default {
     }
   },
   computed: {
-    positiveTests() {
-      return this.data.actuals.positiveTests
-        ? this.data.actuals.positiveTests.toLocaleString()
-        : "None Reported";
-    },
-    negativeTests() {
-      return this.data.actuals.negativeTests
-        ? this.data.actuals.negativeTests.toLocaleString()
-        : "None Reported";
-    },
     percentCases() {
       return this.data.actuals.cases
         ? ((this.data.actuals.cases / this.data.population) * 100).toFixed(3)
@@ -85,8 +109,13 @@ export default {
     },
     percentDeaths() {
       return this.data.actuals.deaths
+        ? ((this.data.actuals.deaths / this.data.population) * 100).toFixed(3)
+        : 0;
+    },
+    percentVaccinated() {
+      return this.data.actuals.vaccinationsCompleted
         ? (
-            (this.data.actuals.deaths / this.data.population) *
+            (this.data.actuals.vaccinationsCompleted / this.data.population) *
             100
           ).toFixed(3)
         : 0;
