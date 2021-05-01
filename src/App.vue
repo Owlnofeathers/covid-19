@@ -1,47 +1,51 @@
 <template>
   <div id="app">
-    <div class="container mx-auto px-10 pb-10">
-      <h1
-        class="text-3xl text-gray-800 font-extrabold text-center my-5 md:mt-20 md:text-5xl"
-      >
-        COVID-19 Totals By US County
-      </h1>
-      <div class="md:text-center md:px-32">
-        <vue-simple-suggest
-          placeholder="Enter your county..."
-          :list="countyCodes"
-          display-attribute="name"
-          :filter-by-query="true"
-          @select="onSelect"
-        ></vue-simple-suggest>
-        <p v-if="error" class="text-red-700 text-sm">{{ error }}</p>
-        <p v-if="stateData" class="mt-3 mb-5 text-sm">
-          Last Updated:
-          <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
-        </p>
+    <div class="min-h-screen bg-gray-100">
+      <div class="container mx-auto pb-10 space-y-10">
+        <h1
+          class="text-3xl text-gray-800 font-extrabold text-center pt-20 md:text-5xl"
+        >
+          COVID-19 Totals By US County
+        </h1>
+        <div class="md:text-center md:px-32">
+          <vue-simple-suggest
+            placeholder="Enter your county..."
+            :list="countyCodes"
+            display-attribute="name"
+            :filter-by-query="true"
+            @select="onSelect"
+          ></vue-simple-suggest>
+          <p v-if="error" class="text-red-700 text-sm">{{ error }}</p>
+          <p v-if="stateData" class="mt-3 mb-5 text-sm">
+            Last Updated:
+            <span class="font-bold">{{ stateData.lastUpdatedDate }}</span>
+          </p>
+        </div>
+        <div class="p-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="md:flex">
+            <transition name="fade">
+              <DisplayData
+                v-if="stateData"
+                :title="`${stateData.state} State`"
+                :data="stateData"
+                class="md:mr-10"
+              ></DisplayData>
+            </transition>
+            <transition name="fade">
+              <DisplayData
+                v-if="countyData"
+                :title="`${countyData.county}, ${countyData.state}`"
+                :data="countyData"
+                class="mt-5 md:mt-0"
+              ></DisplayData>
+            </transition>
+          </div>
+        </div>
+        <div class="p-32 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+          <SourceData :data="countyData" />
+        </div>
+        <Footer></Footer>
       </div>
-      <div class="md:px-32 md:flex">
-        <transition name="fade">
-          <DisplayData
-            v-if="stateData"
-            :title="`${stateData.state} State`"
-            :data="stateData"
-            class="md:mr-10"
-          ></DisplayData>
-        </transition>
-        <transition name="fade">
-          <DisplayData
-            v-if="countyData"
-            :title="`${countyData.county}, ${countyData.state}`"
-            :data="countyData"
-            class="mt-5 md:mt-0"
-          ></DisplayData>
-        </transition>
-      </div>
-      <div class="py-10 md:px-32">
-        <SourceData :data="countyData" />
-      </div>
-      <Footer></Footer>
     </div>
   </div>
 </template>
